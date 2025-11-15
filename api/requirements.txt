@@ -2,3 +2,5 @@ fastapi[all]
 sqlalchemy
 psycopg-binary
 python-dotenv
+alembic
+psycopg2
