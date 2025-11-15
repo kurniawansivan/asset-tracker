@@ -8,7 +8,7 @@ from schemas import asset_schema
 from dependencies import get_db
 
 router = APIRouter(
-    prefix="/assets",
+    prefix="/api/assets",
     tags=["assets"],
 )
 
