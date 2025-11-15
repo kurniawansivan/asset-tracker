@@ -3,7 +3,7 @@ import os
 
 from logging.config import fileConfig
 from database import Base
-from models import asset_model
+from models import asset_model, user_model
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
