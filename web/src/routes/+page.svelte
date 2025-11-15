@@ -12,7 +12,7 @@
 	let assets: Asset[];
 
 	onMount(async () => {
-		const response = await fetch('http://localhost:8000/api/assets');
+		const response = await fetch('http://localhost:8000/api/assets/');
 		const data = await response.json();
 		assets = data;
 	});
