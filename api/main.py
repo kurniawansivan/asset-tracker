@@ -20,8 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(asset_router.router)
 app.include_router(user_router.router)
+app.include_router(asset_router.router)
 
 @app.get("/")
 def read_root():
