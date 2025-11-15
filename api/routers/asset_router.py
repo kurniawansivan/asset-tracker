@@ -20,3 +20,9 @@ def create_asset(asset: asset_schema.AssetCreate, db: Session = Depends(get_db))
     db.commit()
     db.refresh(db_asset)
     return db_asset
+
+@router.get("/", response_model=list[asset_schema.AssetRead])
+def read_assets(db: Session = Depends(get_db)):
+    """Retrieve all assets from the database."""
+    assets = db.query(asset_model.Asset).all()
+    return assets
