@@ -23,8 +23,22 @@
 	});
 
     async function handleSubmit(){
-        console.log("Form submitted");
-        console.log({name, serial_number, purchase_date, warranty_expires});
+        const newAsset = {
+            name,
+            serial_number: serial_number || null,
+            purchase_date,
+            warranty_expire: warranty_expires || null
+        };
+
+        await fetch('http://localhost:8000/api/assets/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newAsset)
+        });
+
+        console.log("New Asset created!")
     }
 </script>
 
