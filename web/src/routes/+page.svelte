@@ -6,28 +6,31 @@
         name: string;
         serial_number: string | null;
         purchase_date: string; 
-        wwarranty_expires: string | null;
+        warranty_expires: string | null;
     }
 
-	let assets: Asset[];
-
+	let assets: Asset[] = [];
     let name = '';
     let serial_number = '';
     let purchase_date = '';
     let warranty_expires = '';
 
-	onMount(async () => {
+	async function getAssets() {
 		const response = await fetch('http://localhost:8000/api/assets/');
 		const data = await response.json();
 		assets = data;
-	});
+	}
+
+    onMount(() => {
+        getAssets();
+    });
 
     async function handleSubmit(){
         const newAsset = {
             name,
             serial_number: serial_number || null,
             purchase_date,
-            warranty_expire: warranty_expires || null
+            warranty_expires: warranty_expires || null
         };
 
         await fetch('http://localhost:8000/api/assets/', {
@@ -37,8 +40,14 @@
             },
             body: JSON.stringify(newAsset)
         });
-
         console.log("New Asset created!")
+
+        await getAssets();
+
+        name = '';
+        serial_number = '';
+        purchase_date = '';
+        warranty_expires = '';
     }
 </script>
 
@@ -73,5 +82,6 @@
     <h2>{asset.name}</h2>
     <p>Serial Number: {asset.serial_number}</p>
     <p>Purchase Date: {asset.purchase_date}</p>
+    <p>Warranty Expires: {asset.warranty_expires}</p>
   </div>
 {/each}
