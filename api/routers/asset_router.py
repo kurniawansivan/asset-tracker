@@ -1,6 +1,6 @@
 """
 Asset router module for handling asset-related API endpoints."""
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from models import asset_model
@@ -12,7 +12,7 @@ router = APIRouter(
     tags=["assets"],
 )
 
-@router.post("/", response_model=asset_schema.AssetRead, status_code=201)
+@router.post("/", response_model=asset_schema.AssetRead, status_code=status.HTTP_201_CREATED)
 def create_asset(asset: asset_schema.AssetCreate, db: Session = Depends(get_db)):
     """Create a new asset in the database."""
     db_asset = asset_model.Asset(**asset.model_dump())
